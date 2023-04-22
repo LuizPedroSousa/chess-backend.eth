@@ -3,13 +3,13 @@ import 'dotenv/config';
 import 'express-async-errors';
 import { cors } from '@config/cors';
 import { InfraRegistrationDependencies } from '@shared/infra/InfraRegistrationDependencies';
-import { ExceptionHandler } from '@shared/infra/middlewares/ExceptionHandler';
 import { errors } from 'celebrate';
 import express, { Express as Application } from 'express';
 import rateLimit from 'express-rate-limit';
 import helmet from 'helmet';
 import { Server as HttpServer, createServer } from 'http';
 import { ApplicationRegistrationDependencies } from '@shared/application/ApplicationRegistrationDependencies';
+import { ExceptionHandler } from '@shared/infra/http/middlewares/ExceptionHandler';
 
 class Main {
   public app: Application;
@@ -36,14 +36,11 @@ class Main {
     });
 
     this.app.set('trust proxy', 1);
-
     this.app.use(limiter);
-
     this.app.use(helmet());
     this.app.use(express.json());
     this.app.use(cors);
     this.app.use(express.urlencoded({ extended: true }));
-
     this.app.use(express.static('public'));
   }
 
