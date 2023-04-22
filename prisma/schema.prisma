@@ -21,24 +21,3 @@ model User {
 
   @@map("users")
 }
-
-model UserPlayedGames {
-  id String @id @default(uuid())
-}
-
-model Ratings {
-  id     String @id @default(uuid())
-  game   Game   @relation(fields: [gameId], references: [id])
-  gameId String
-}
-
-model Game {
-  id      String    @id @default(uuid())
-  ratings Ratings[]
-}
-
-model Round {
-  id String @id @default(uuid())
-}
-
-// 1 / (1 + 10 ^ ((Opponent Rating - Player Rating) / 400))

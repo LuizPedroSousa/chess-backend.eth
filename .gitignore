@@ -1,2 +1,4 @@
 node_modules
 .env
+src/shared/infra/keys/public-key.pem
+src/shared/infra/keys/private-key.pem

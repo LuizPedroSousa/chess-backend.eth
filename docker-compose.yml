@@ -22,7 +22,7 @@ services:
     image: postgres
     volumes:
       - ./scripts/postgres/init_sql.sh:/docker-entrypoint-initdb.d/init_sql.sh
-    container_name: bots_postgres
+    container_name: chess.eth-postgres
     environment:
       PUID: 1000
       PGID: 1000
