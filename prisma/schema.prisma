@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  username String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt()
+
+  @@map("users")
+}
+
+model UserPlayedGames {
+  id String @id @default(uuid())
+}
+
+model Ratings {
+  id     String @id @default(uuid())
+  game   Game   @relation(fields: [gameId], references: [id])
+  gameId String
+}
+
+model Game {
+  id      String    @id @default(uuid())
+  ratings Ratings[]
+}
+
+model Round {
+  id String @id @default(uuid())
+}
+
+// 1 / (1 + 10 ^ ((Opponent Rating - Player Rating) / 400))
