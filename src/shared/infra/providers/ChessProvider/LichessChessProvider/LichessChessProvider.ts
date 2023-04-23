@@ -9,6 +9,8 @@ import { mapper } from '@shared/infra/mappings/mapper';
 import axios from 'axios';
 import { injectable } from 'tsyringe';
 import { UserModel } from './models/UserModel';
+import { Challenge } from '@modules/challenges/core/domain/Challenge';
+import { CreateChallengeDTO } from '@shared/application/contracts/providers/ChessProvider/DTOs/CreateChallengeDTO';
 
 const api = axios.create({
   baseURL: 'https://lichess.org/api',

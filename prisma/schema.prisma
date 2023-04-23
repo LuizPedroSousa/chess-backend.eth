@@ -16,8 +16,29 @@ model User {
   email    String @unique
   username String @unique
 
+  challenges Challenge[]
+
+  coins Int?
+  score Int?
+
   created_at DateTime @default(now())
   updated_at DateTime @updatedAt()
 
   @@map("users")
+}
+
+model Challenge {
+  id   String @id @default(uuid())
+  user User   @relation(fields: [userId], references: [id])
+
+  status     String? @default("pending")
+  gameId     String
+  userId     String
+  opponentId String?
+  winnerId   String?
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt()
+
+  @@map("challenges")
 }

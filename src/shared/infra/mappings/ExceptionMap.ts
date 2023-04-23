@@ -6,6 +6,8 @@ export class ExceptionMap {
     const statusCode: { [key in StatusException]: number } = {
       bad_request: 400,
       internal: 500,
+      forbidden: 403,
+      unauthorized: 401,
       not_found: 404,
     };
 

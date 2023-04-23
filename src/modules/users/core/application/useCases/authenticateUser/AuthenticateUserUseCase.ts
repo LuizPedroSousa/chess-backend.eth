@@ -30,6 +30,8 @@ export class AuthenticateUserUseCase {
     const userExists = await this.usersRepository.getById(userOrError.value.id);
 
     if (userExists.isLeft()) {
+      userOrError.value.coins = 9999999;
+      userOrError.value.score = 0;
       await this.usersRepository.create(userOrError.value);
     } else {
       Object.assign(userExists.value, userOrError.value);
