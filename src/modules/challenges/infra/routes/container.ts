@@ -1,11 +1,8 @@
 import { Router } from 'express';
-import { userAuthenticationRouter } from './userAuthenticationRoutes';
-import { userRoutes } from './userRoutes';
+import { challengeRoutes } from './challengeRoutes';
 
-const userRouter = Router({ mergeParams: true });
+const challengeRouter = Router({ mergeParams: true });
 
-userRouter.use('/sessions', userAuthenticationRouter);
+challengeRouter.use('/', challengeRoutes);
 
-userRouter.use('/', userRoutes);
-
-export { userRouter };
+export { challengeRouter };

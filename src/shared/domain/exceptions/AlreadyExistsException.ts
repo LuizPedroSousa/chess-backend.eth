@@ -1,7 +1,7 @@
 import { BaseException } from './BaseException';
 
 export class AlreadyExistsException extends BaseException {
-  constructor(name: string) {
-    super('bad_request', `${name} ja existe`);
+  constructor(message: string) {
+    super('bad_request', message);
   }
 }

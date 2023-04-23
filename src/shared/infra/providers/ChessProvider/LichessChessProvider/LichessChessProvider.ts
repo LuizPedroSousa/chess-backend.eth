@@ -26,7 +26,6 @@ const getAccount = async (token: string) => {
   return data;
 };
 
-
 const getEmail = async (token: string) => {
   const { data } = await api.get('/account/email', {
     headers: {
@@ -36,24 +35,9 @@ const getEmail = async (token: string) => {
 
   return data?.email;
 };
-const createChallenge = async (username: string, token: string) => {
-  const {data} = await api.post(`/challenge/${username}`, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
-  return data;
-}
+
 @injectable()
 export class LichessChessProvider implements ChessProvider {
-  createChallenge(data: CreateChallengeDTO): Promise<Either<NotFoundException, Challenge>> {
-    try {
-      createChallenge
-    throw new Error('Method not implemented.');
-    } catch(error: any) {
-
-    }
-  }
   async getUser(data: GetUserDTO): Promise<Either<NotFoundException, User>> {
     try {
       const account = await getAccount(data.token);

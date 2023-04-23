@@ -5,21 +5,25 @@ import { NotFoundException } from '@shared/domain/exceptions/NotFoundException';
 import { inject, injectable } from 'tsyringe';
 import { CreateChallengeDTO } from './DTOs/CreateChallengeDTO';
 import { ChallengesRepository } from '../../contracts/repositories/ChallengesRepository';
+import { Challenge } from '@modules/challenges/core/domain/Challenge';
+import { AlreadyExistsException } from '@shared/domain/exceptions/AlreadyExistsException';
 
 @injectable()
 export class CreateChallengeUseCase {
   constructor(
-    @inject(DependenciesInversion.UsersRepository)
+    @inject(DependenciesInversion.ChallengesRepository)
     private readonly challengesRepository: ChallengesRepository,
   ) {}
 
-  async execute({ id }: CreateChallengeDTO): Promise<Either<NotFoundException, User>> {
-    const challengeExists = await this.challengesRepository.getById(id);
+  async execute(data: CreateChallengeDTO): Promise<Either<AlreadyExistsException, Challenge>> {
+    const challengeExists = await this.challengesRepository.getByStatus('pending');
 
-    if (challengeExists.isLeft()) {
-      return left(challengeExists.value);
+    if (challengeExists.isRight()) {
+      return left(new AlreadyExistsException('Challenge already exists'));
     }
 
-    return right(challengeExists.value);
+    const challenge = await this.challengesRepository.create(new Challenge(data));
+
+    return right(challenge);
   }
 }

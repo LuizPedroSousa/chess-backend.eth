@@ -1,11 +1,21 @@
 import { AutoMap } from '@automapper/classes';
+import { User } from '@modules/users/core/domain/User';
 import { BaseEntity } from '@shared/domain/BaseEntity';
 
 export class Challenge extends BaseEntity {
   @AutoMap()
-  public name: string;
+  user: User;
   @AutoMap()
-  public email: string;
+  status?: string;
   @AutoMap()
-  public username: string;
+  gameId: string;
+  @AutoMap()
+  opponentId?: string;
+  @AutoMap()
+  winnerId?: string;
+
+  constructor(props: any) {
+    super();
+    Object.assign(this, props);
+  }
 }

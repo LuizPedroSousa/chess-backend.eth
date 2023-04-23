@@ -4,6 +4,10 @@ import { BaseModel } from '@shared/infra/persistence/models/BaseModel';
 
 export class UserModel extends BaseModel implements PrismaUser {
   @AutoMap()
+  coins: number;
+  @AutoMap()
+  score: number;
+  @AutoMap()
   name: string;
   @AutoMap()
   username: string;

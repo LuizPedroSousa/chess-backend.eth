@@ -1,7 +1,7 @@
 import corsOrigin from 'cors';
 import { CorsOriginException } from '../shared/infra/exceptions/CorsOriginException';
 
-const allowedOrigins = ['http://192.168.10.39:3000', 'https://localhost:3001'];
+const allowedOrigins = ['http://192.168.10.39:5173', 'https://localhost:3000'];
 
 const cors = corsOrigin({
   origin: (origin, callback) => {
