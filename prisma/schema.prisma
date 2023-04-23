@@ -21,3 +21,14 @@ model User {
 
   @@map("users")
 }
+
+model Challenge {
+  id    String @id @default(uuid())
+  token String @unique
+  user  String @unique
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt()
+
+  @@map("challenges")
+}
